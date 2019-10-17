@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2019-10-15T02:27:38Z"
+  labels:
+    app: alpaca
+    env: prod
+    var: "1"
+  name: alpaca-prod
+  namespace: default
+  resourceVersion: "698699"
+  selfLink: /api/v1/namespaces/default/services/alpaca-prod
+  uid: 5b6b7149-eef3-11e9-97dc-42010a920002
+spec:
+  clusterIP: 10.28.8.60
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 32360
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: alpaca
+    env: prod
+    var: "1"
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.84.71.181
