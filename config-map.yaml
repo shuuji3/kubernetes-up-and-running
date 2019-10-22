@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  some-key: some-value
+  another-key: another-value
+  config.toml: |
+    x = 1
+    [y]
+    z = 2

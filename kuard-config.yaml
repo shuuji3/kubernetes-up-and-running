@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard-config
+  labels:
+    app: kuard-config
+spec:
+  containers:
+    - name: kuard-config
+      image: gcr.io/kuar-demo/kuard-amd64:1
+      imagePullPolicy: Always
+      command:
+        - "/kuard"
+        - "$(SOME_KEY)"
+      env:
+        - name: ANOTHER_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: another-key
+        - name: SOME_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: some-key
+      volumeMounts:
+        - mountPath: /config
+          name: config-volume
+  volumes:
+    - name: config-volume
+      configMap:
+        name: config
+  restartPolicy: Never
